@@ -1,5 +1,5 @@
 {
-    "name": "NXT-CODE/seaweedfs-client",
+    "name": "nxt-code/seaweedfs-client",
     "description": "A SeaweedFS implementation for PHP based on Guzzle with JWT authentication",
     "type": "library",
     "license": "ISC",
