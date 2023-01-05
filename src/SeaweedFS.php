@@ -83,7 +83,7 @@ class SeaweedFS {
 
         $body = json_decode((string) $res->getBody());
 
-        return new File($body, $this->scheme);
+        return new File($body, $this->scheme, $res->getHeader('Authorization')[0]);
     }
 
     /**
@@ -120,7 +120,7 @@ class SeaweedFS {
 
         $body = json_decode((string) $res->getBody());
 
-        $volume = new Volume($body);
+        $volume = new Volume($body, $res->getHeader('Authorization')[0]);
 
         if ($this->cache) {
             $this->cache->put($cacheKey, $volume);
@@ -150,6 +150,7 @@ class SeaweedFS {
         }
 
         $res = $this->client->post($this->buildVolumeUrl($file->url, $file->fid), [
+            'headers' => ['Authorization' => $file->auth],
             'multipart' => [
                 [
                     'name'     => 'file',
@@ -277,7 +278,9 @@ class SeaweedFS {
             throw new SeaweedFSException('Unable to find volume for ' . $fid);
         }
 
-        $res = $this->client->delete($this->buildVolumeUrl($volume->getUrl(), $fid));
+        $res = $this->client->delete($this->buildVolumeUrl($volume->getUrl(), $fid), [
+            'headers' => ['Authorization' => $file->auth]
+        ]);
 
         if ($res->getStatusCode() != 202) {
             throw new SeaweedFSException('Unexpected response when deleting file: ' . $res->getStatusCode());

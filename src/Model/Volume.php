@@ -8,6 +8,12 @@ namespace SeaweedFS\Model;
  * @package SeaweedFS\Model
  */
 class Volume {
+
+    /**
+     * @var string The auth string.
+     */
+    public $auth;
+
     /**
      * @var array Volume locations
      */
@@ -18,10 +24,12 @@ class Volume {
      *
      * @param $data
      */
-    public function __construct($data) {
+    public function __construct($data, $auth) {
         foreach ($data->locations as $location) {
             $this->locations[] = new Location($location);
         }
+
+        $this->auth = $auth;
     }
 
     /**

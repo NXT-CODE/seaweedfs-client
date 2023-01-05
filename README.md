@@ -2,6 +2,7 @@ SeaweedFS PHP Client
 ====================
 
 A basic but functional PHP client for [seaweedfs](https://github.com/chrislusf/seaweedfs)
+Based on the works of https://github.com/tystuyfzand/laravel-seaweedfs
 
 Usage
 -----

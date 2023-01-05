@@ -8,6 +8,12 @@ namespace SeaweedFS\Model;
  * @package SeaweedFS\Model
  */
 class File extends Location {
+
+    /**
+     * @var string The auth string.
+     */
+    public $auth;
+
     /**
      * @var string The file id.
      */
@@ -28,11 +34,12 @@ class File extends Location {
      * @param $obj
      * @param string $scheme
      */
-    public function __construct($obj, $scheme = 'http') {
+    public function __construct($obj, $scheme = 'http', $auth) {
         parent::__construct($obj);
 
         $this->fid = $obj->fid;
         $this->scheme = $scheme;
+        $this->auth = $auth;
     }
 
     /**

@@ -1,12 +1,12 @@
 {
-    "name": "tystuyfzand/seaweedfs-client",
-    "description": "A SeaweedFS implementation for PHP based on Guzzle",
+    "name": "NXT-CODE/seaweedfs-client",
+    "description": "A SeaweedFS implementation for PHP based on Guzzle with JWT authentication",
     "type": "library",
     "license": "ISC",
     "authors": [
         {
-            "name": "Tyler Stuyfzand",
-            "email": "tyler@tystuyfzand.com"
+            "name": "NXT CODE",
+            "email": "info@nxtyou.de"
         }
     ],
     "require": {
