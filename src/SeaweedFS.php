@@ -94,25 +94,8 @@ class SeaweedFS {
      * @throws SeaweedFSException
      */
     public function lookup($id) {
-        if ($pos = strpos($id, ',')) {
-            $id = substr($id, 0, $pos);
-        }
 
-        $cacheKey = 'volume_' . $id;
-
-        if ($this->cache && $this->cache->has($cacheKey)) {
-            $val = $this->cache->get($cacheKey);
-
-            if (!$val instanceof Volume) {
-                $val = new Volume($val);
-            }
-
-            return $val;
-        }
-
-        $res = $this->client->get($this->buildMasterUrl(self::DIR_LOOKUP), [
-            'query' => [ 'volumeId' => $id ]
-        ]);
+        $res = $this->client->get($this->buildMasterUrl(self::DIR_LOOKUP) . '?fileId=' . $id);
 
         if ($res->getStatusCode() != 200) {
             throw new SeaweedFSException('Unexpected response when looking up volume: ' . $res->getStatusCode());
@@ -279,7 +262,7 @@ class SeaweedFS {
         }
 
         $res = $this->client->delete($this->buildVolumeUrl($volume->getUrl(), $fid), [
-            'headers' => ['Authorization' => $file->auth]
+            'headers' => ['Authorization' => $volume->auth]
         ]);
 
         if ($res->getStatusCode() != 202) {
